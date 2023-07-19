@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+    <title>Login your Account</title>
+    <style>
+      body {
+        max-height: max-content;
+        background-image: linear-gradient(rgb(255, 255, 255), rgb(29, 29, 29));
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-white">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html"
+          ><img
+            class="d-flex justify-content-end"
+            style="height: 8ch"
+            src="fuji.png"
+            alt="fujilogo.png"
+        /></a>
+      </div>
+    </nav>
+    <div
+      class="container bg-light rounded-5 shadow-lg"
+      style="
+        margin-top: 5%;
+        margin-bottom: 0%;
+        font-weight: bold;
+        padding-top: 0.5ch;
+        padding-left: 5ch;
+        padding-right: 5ch;
+        width: fit-content;
+      "
+    >
+      <br />
+      <h2>Login your Account</h2>
+      <hr />
+      <form id="login-form">
+        <div class="container">
+          <label for="email">Email:</label><br />
+          <input
+            type="email"
+            name="email"
+            id="email"
+            style="width: 420px"
+            placeholder="Please input email address"
+            required
+          />
+          <br /><br />
+          <label for="password">Password:</label><br />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            minlength="6"
+            style="width: 420px"
+            placeholder="Please input password"
+            required
+          />
+          <br /><br />
+          <button
+            type="submit"
+            class="btn btn-dark"
+            style="color: whitesmoke; font-size: larger; font-weight: bold"
+          >
+            Login
+          </button>
+          <p class="small fw-bold mt-2 pt-1 mb-0">
+            Don't have an account ?
+            <a href="index.html" class="link-success">Register here!</a>
+          </p>
+          <br />
+        </div>
+      </form>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-auth.js"></script>
+    <script>
+      // Initialize Firebase app
+      const firebaseConfig = {
+  apiKey: "AIzaSyDHZS_kpEJ0cCy405Yao8RLOjKJyrbIm9E",
+  authDomain: "inventory-ff425.firebaseapp.com",
+  projectId: "inventory-ff425",
+  storageBucket: "inventory-ff425.appspot.com",
+  messagingSenderId: "865765387567",
+  appId: "1:865765387567:web:1b91e5eb00383a057d85da"
+};
+      firebase.initializeApp(firebaseConfig);
+
+      // Handle form submit
+      const loginForm = document.getElementById("login-form");
+      loginForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const email = loginForm.email.value.trim();
+        const password = loginForm.password.value.trim();
+
+        try {
+          // Sign in user with email and password
+          await firebase.auth().signInWithEmailAndPassword(email, password);
+          alert("Login successfully!");
+          window.location.href = "viewproducts.html";
+          // Redirect to new URL
+        } catch (error) {
+          console.error(error);
+          alert("Failed to login. Invalid Credentials.");
+        }
+      });
+    </script>
+  </body>
+  <footer style="margin-top: 50ch" class="bg-white text-black py-3">
+    <div class="container text-center">
+      <span>©FujiFilm Asia Pacific</span>
+    </div>
+  </footer>
+</html>
